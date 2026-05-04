@@ -2,8 +2,6 @@
 
 > *"Such workforce. Many cuts. Wow."*
 
-![repo banner](banner.png)
-
 ![](images/clipboard-3937422055.png)
 
 ## Overview
@@ -49,15 +47,15 @@ We scraped Reddit so you don't have to. We ran the models so you can judge us. W
 
 ## 📄 Papers
 
-1.  *DOGE Days on Reddit: Decoding Public Sentiment in a Federal Shakeup* → `reddit_doge_paper.pdf`
-2.  *DOGE's Downsizing, Can AI Read the Reddit Room?* → `llm_reddit_doge_paper.pdf`
+1.  [DOGE Days on Reddit: Decoding Public Sentiment in a Federal Shakeup](https://klinares.github.io/DOGE_Days_R_Over/code/reddit_doge/reddit_doge_paper.html)
+2.  [DOGE's Downsizing, Can AI Read the Reddit Room?](https://klinares.github.io/DOGE_Days_R_Over/code/ml_llm/R/MLtexttutorial.nb.html)
 
 ## 👥 Authors
 
 -   **Kevin Linares** — University of Maryland
--   **Felix Baez-Santiago**
-    -   **Aria Lu**
-    -   **Gloria Zhou** — University of Michigan
+-   **Felix Baez-Santiago** — University of Michigan
+-   **Aria Lu** — University of Michigan
+-   **Gloria Zhou** — University of Michigan
 
 ------------------------------------------------------------------------
 
