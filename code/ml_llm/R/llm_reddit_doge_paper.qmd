@@ -2,7 +2,7 @@
 title: "DOGE's Downsizing, Can AI Read the Reddit Room?"
 format:
   jasa-pdf:
-    keep-tex: true  
+    keep-tex: false  
     journal:
       blinded: false
   jasa-html: default
@@ -40,7 +40,7 @@ library(tidyverse)
 
 
 # read in ML results from repo
-results_folder <- "~/work/d/SURV622_Assignment/outputs/ml_llm/"
+results_folder <- "D://repos/DOGE_Days_R_Over/outputs/ml_llm/"
 
 ml_results <-  read.csv(str_c(
   results_folder, "results_long.csv")) |> 

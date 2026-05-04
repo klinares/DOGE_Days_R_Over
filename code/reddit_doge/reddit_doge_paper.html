@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kevin Linares">
+<meta name="author" content="Felix Baez-Santiago">
+<meta name="author" content="Aria Lu">
+<meta name="author" content="Gloria Zhou">
+<meta name="dcterms.date" content="2026-05-04">
+<meta name="keywords" content="Reddit, Federal Government, DOGE">
+
+<title>DOGE Days on Reddit: Decoding Public Sentiment in a Federal Shakeup</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="reddit_doge_paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="reddit_doge_paper_files/libs/quarto-html/quarto.js"></script>
+<script src="reddit_doge_paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="reddit_doge_paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="reddit_doge_paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="reddit_doge_paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="reddit_doge_paper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="reddit_doge_paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="reddit_doge_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="reddit_doge_paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">DOGE Days on Reddit: Decoding Public Sentiment in a Federal Shakeup</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Kevin Linares </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Maryland
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Felix Baez-Santiago </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Aria Lu </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Gloria Zhou </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Michigan
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 4, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>This study explores the impact of the Department of Government Efficiency (DOGE)’s federal workforce reductions, known as reduction in force (RIF), on public sentiment, utilizing Reddit as a data source. We scraped the Reddit API from March 2nd to March 10th resulting in 557 unique posts with 12,553 comments from subreddits related to DOGE’s approach to the RIF. Our exploratory analysis captures peaks in the number of posts/comments following major news event coverage related to the RIF, highlighting the utility of social media for understanding public perception of policy impacts. Our text analysis reveals a saliency on community with words such as people, employees, service, public, workers, and care being top words in both posts and comments. Moreover, a team of researchers coded a random subset of comments for public sentiment and found that only a quarter approved of DOGE’s actions towards the RIF.</p>
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>Reddit, Federal Government, DOGE</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="sec-intro" class="level2">
+<h2 class="anchored" data-anchor-id="sec-intro">Introduction</h2>
+<p>Since its inception in January 2025, the Department of Government Efficiency (DOGE) has implemented significant reductions in the federal workforce, resulting in the separation of over 200,000 employees, in alignment with the new administration’s campaign promises. These reductions have generated widespread concern and anxiety among federal workers regarding their job security and mental well-being. Reports indicate that DOGE’s methods have raised questions about adherence to established internal policies. The ongoing debate surrounding DOGE’s impact on federal worker perceptions of job security necessitates a thorough examination. This study proposes that Reddit, as a platform for public discourse, provides researchers with valuable insights into real-time reactions and discussions among federal workers on this topic. Furthermore, this research aims to capture a range of public sentiments, including both critical and supportive perspectives, regarding DOGE’s workforce reduction efforts.</p>
+</section>
+<section id="sec-meth" class="level2">
+<h2 class="anchored" data-anchor-id="sec-meth">Methods</h2>
+<p><em>Search Terms</em>. Our initial Reddit API scrape facilitated the development of a targeted keyword search strategy for this research. This iterative process resulted in the selection of eight keywords (see Table 1). We excluded keywords deemed vague or overly broad, such as ‘Elon Musk’ or ‘drain the swamp.’ Additionally, we observed that certain keywords yielded a high volume of irrelevant posts. For example, ‘policy changes’ returned numerous discussions unrelated to government workforce reductions. Similarly, ‘DOGE’ produced results related to DOGEcoin, which is outside the scope of this study. Therefore, we meticulously examined the subreddits identified in our initial scrape and selected those containing relevant discussions. To ensure a balanced representation of viewpoints, we included subreddits with conservative perspectives, such as ‘neoliberal’ and ‘AskConservatives,’ while avoiding subreddits focused on specific agencies like ‘NIH’ or ‘CDC,’ which could skew the data. In total, we selected 19 subreddits (see Appendix A) and utilized eight keywords, resulting in 152 unique keyword and subreddit combinations for our data collection.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>List of keywords related to topic</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">search_term</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">DOGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Department of Government Efficiency</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wasteful spending</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">government waste</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">government fraud</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reduction in force</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rif</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fork in the road</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><em>Analytic Plan</em>. We collected data from the Reddit API hourly, from March 2nd through the 10th, by scraping each combination of our eight keywords and 19 subreddits, resulting in 152 API requests per hour. Reddit API rate limits were managed by implementing a sleep timer between requests. Raw data from new Reddit posts were entered into a data table without initial processing. Following the data collection period, the raw dataset contained 643 posts. Each row in the data table represented a single post, and the columns included the post’s date and time, title, text, subreddit, comment count, URL, and the search term used for collection. Duplicate posts, which occurred when multiple keywords matched the same post, were removed. Post text was cleaned by removing weblinks and converting special characters, such as the at sign, to the word ‘at.’ The date column was converted to a date class variable, and the day of the week and time of day were extracted for analysis. After cleaning, the dataset consisted of 557 posts.</p>
+<p>A preliminary review of the posts revealed that many were factual statements, questions, or reposted news articles and videos, which were not suitable for sentiment coding. Therefore, we also scraped the comments associated with each post. This resulted in 12,553 comments after processing, including information on score, up/down votes, and date/time. Comments containing only weblinks, videos, or images were removed. A review of the comments revealed more opinionated statements and reactions. We then randomly selected 400 comments (without replacement) and assigned them to four graduate students for coding, categorizing each comment as favoring, opposing, or neutral towards DOGE’s approach to federal workforce reductions.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p><em>Post and Comment Trends</em></p>
+<p>We show the number of posts pre/post processing by day in Figure 1 during the timeframe that we collected these data. There appears to be a noticeable peak in activity during the middle of the week. However, we do not have enough data across weeks to conclusively say it is due to the day of the week itself. It is more likely that these spikes are linked to specific events that occurred on those days, which sparked conversations. The two peaks in our graph could be attributed to two major news stories. On March 5th, Elon Musk made a statement about wanting to “save Western civilization from empathy,” and on March 6th, there were reports that President Trump was limiting Musk’s authority due to backlash over cuts to DOGE. These events likely had a significant impact on the volume of Reddit posts related to Elon Musk and DOGE, driving the observed spikes in activity.</p>
+<p>On March 3rd, news outlets started reporting that DOGE was claiming $105 billion dollars in savings from cutting “wasteful” spending by layoffs and cutting foreign aid. This amount is controversial since since the receipts shown on their site only amount to less than <a href="https://abcnews.go.com/US/doge-website-now-saved-105-billion-backtracked-earlier/story?id=119408347">$9.6 billion</a>. This could have prompted Reddit users to take to subreddits and provide their opinion or thoughts on this matter.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="reddit_doge_paper_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We see a peak in the comments in Figure 2 on March 6th, which was a Thursday, and perhaps in anticipation of DOGE policies that often are released on Friday morning and have come to be known as “<a href="https://smotus.substack.com/p/friday-night-musk-acre">Musk-acre Friday</a>.”</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="reddit_doge_paper_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Word Frequency</em></p>
+<p>Most posts occur during the early morning, noon, and afternoon hours (see Figure 3). The highest peak is around lunchtime, likely due to people posting during their lunch break. There is also significant activity in the afternoon, evening, and early morning. It is possible that people have more time in the evenings allowing them to be more likely to post on Reddit. The fewest posts are seen in the morning, which makes sense as people are typically getting ready for work, commuting, or sleeping in. The trend for comments (see Figure 3) mirrors that of posts. This makes sense because people are likely using Reddit at similar times for both posting and commenting. However, the volume of comments is much higher than the number of posts, as each post receives many comments from different users.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="reddit_doge_paper_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The graphs below (Figure 4) show the most frequent words used in both Reddit posts and their comment sections while excluding our keyword search terms. These words were identified by tokenizing the text and removing stop words, then counting the occurrences of the most common terms. The removal of stop words allowed us to focus on contextual words in the posts/comments rather than common words like “the” and “and” that are not useful in these types of analysis. Examining this visual reveals that in posts the current president’s name is the top word. However, in both posts and comments, there appears to be an emerging theme of community as words like people, employees, service, care, jobs, and public are also top words. This highlights the focus of the community on these key themes, reflecting the ongoing conversations and interests of Reddit users within this context.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="reddit_doge_paper_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Coding Comments</em></p>
+<p>We randomly selected and coded 400 comments from the Reddit posts. Table 2 shows the distribution of favorability coding for these comments. Among the 400 comments, the majority (217) expressed opposition to DOGE’s approach to reducing the federal workforce, while 110 were supportive, and 73 remained neutral. A large number of comments (12,153) were not coded, as their content was not relevant for favorability assessment.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Distribution of favorability coding for 400 comments</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">outcome</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Not Coded</td>
+<td style="text-align: right;">12153</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">favor</td>
+<td style="text-align: right;">110</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">neutral</td>
+<td style="text-align: right;">73</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">oppose</td>
+<td style="text-align: right;">217</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this study, we explored the impact of the DOGE’s actions towards the reduction in force impacting federal workers’ perceptions of job security, using Reddit as a platform to analyze public discourse. In examining Reddit posts and comments related to DOGE’s workforce reduction policies, we gained valuable insights into the sentiments of both federal workers and the broader public. Our findings indicate that these discussions are heavily influenced by political events and high-profile figures, such as President Trump and Elon Musk, with particular attention given to DOGE’s controversial cost-cutting measures. Through the analysis of both posts and comments, we captured a wide range of reactions, with the majority being strongly opposed to DOGE’s approach. The frequent mention of terms related to the administration underscores the community’s focus on government policies and the emotional responses these issues generate.</p>
+<p>In terms of favorability, the distribution of comments revealed that 217 out of 400 were opposed to DOGE’s approach, 110 were supportive, and 73 were neutral. Additionally, patterns in post volume, especially peaks during significant news events, highlight the dynamic nature of these discussions, providing insights into the timing and public reactions to key policy decisions. While our study provides a snapshot of Reddit discussions during a specific period, the findings demonstrate the value of social media platforms like Reddit in capturing public sentiment on contemporary political and policy issues. However, it is important to note that Reddit may not fully represent the broader population’s views, as the platform tends to skew younger and more politically engaged, potentially limiting the generalizability of these findings.</p>
+<p>The use of sentiment analysis on social media presents challenges, as it can be influenced by sarcasm, humor, or polarized language, which might affect the accuracy of sentiment classification. Therefore, our research team hand coded a subset of comments, yet inter-rater reliability was not estimated. The specific subreddits analyzed, while designed to capture diverse perspectives, may still over-represent certain political or ideological viewpoints. Moreover, the relatively short timeframe of this analysis—spanning only March 2nd to March 10th—means that we may not have captured long-term trends or shifts in sentiment as the DOGE policies unfold. Future research could address these limitations by expanding the data collection to other platforms or a longer timeframe and by incorporating demographic data to better understand the views of different Reddit user groups.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<p>We examined almost 100 subreddit posts while paying attention to the post topics and determined which ones were related to our topic. We also included right leaning subreddits to attempt to capture a balanced public sentiment on the topic. The following is our final list of subreddits that we scraped from.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>List of subreddits relevant to the topic of DOGE</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">subreddit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">50501</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fednews</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">neoliberal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FedEmployees</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WhatTrumpHasDone</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Whistleblowers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">economy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PoliticalOpinions</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Trumpvirus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Virginia</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Libertarian</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AskTrumpSupporters</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Askpolitics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Conservative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">VeteransAffairs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">economicCollapse</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">feddiscussion</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maryland</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">govfire</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

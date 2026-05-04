@@ -42,8 +42,7 @@ library(patchwork)
 
 
 # path to repo
-#repo_path <- str_c("~/Desktop/UMICH/SURV622_Assignment/data/") # felix
-repo_path <- str_c("~/repos/SURV622_Assignment/data/") # kevin
+repo_path <- str_c("D://repos/DOGE_Days_R_Over/data/") 
 
 
 data_files <- list.files(repo_path) |> 
