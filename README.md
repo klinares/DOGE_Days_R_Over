@@ -48,7 +48,7 @@ We scraped Reddit so you don't have to. We ran the models so you can judge us. W
 ## 📄 Papers
 
 1.  [DOGE Days on Reddit: Decoding Public Sentiment in a Federal Shakeup](https://klinares.github.io/DOGE_Days_R_Over/code/reddit_doge/reddit_doge_paper.html)
-2.  [DOGE's Downsizing, Can AI Read the Reddit Room?](https://klinares.github.io/DOGE_Days_R_Over/code/ml_llm/R/MLtexttutorial.nb.html)
+2.  [DOGE's Downsizing, Can AI Read the Reddit Room?](https://github.com/klinares/DOGE_Days_R_Over/blob/main/code/ml_llm/R/llm_reddit_doge_paper.pdf)
 
 ## 👥 Authors
 
